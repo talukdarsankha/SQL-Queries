@@ -1,0 +1,871 @@
+
+
+CREATE DATABASE ORG ;
+USE ORG;
+CREATE TABLE Worker (
+WORKAR_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+FIRST_NAME CHAR(20),
+LAST_NAME CHAR(20),
+SALARY INT (12),
+JOINING_DATE DATETIME ,
+DEPARTMENT CHAR(20)
+);
+
+INSERT INTO Worker 
+(WORKAR_ID,FIRST_NAME,LAST_NAME,SALARY,JOINING_DATE,DEPARTMENT) VALUES
+(001,'RAM','BHAT',485214,'22-02-22','HRE'),
+(002,'SAM','KASL',798689,'22-03-15','DEVLOPER'),
+(003,'JODU', 'MASAL' ,35896,'22-05-9','DEVLOPER');
+
+create TABLE BONUS(
+WORKER_REF_ID INT,
+BOUNS_AMOUNT INT,
+BONUS_DATE DATETIME,
+FOREIGN KEY (WORKER_REF_ID)
+REFERENCES Worker(WORKAR_ID)
+ON delete cascade
+);
+
+INSERT INTO BONUS (WORKER_REF_ID,BOUNS_AMOUNT,BONUS_DATE) values
+(001,57000,'23-01-05'),
+(002,5348,'23-01-8'),
+(003,7888,'23-01-14');
+
+create table TITLE(
+WORKER_REF_ID INT,
+WORKER_TITLE CHAR(20),
+
+AFFECTED_FROM datetime,
+FOREIGN KEY (WORKER_REF_ID)
+REFERENCES Worker(WORKAR_ID)
+ON DELETE CASCADE
+);
+insert into TITLE (WORKER_REF_ID,WORKER_TITLE,AFFECTED_FROM) values
+(001,'DEVELOPER','23-02-4'),
+(002,'HRE','23-01-7');
+
+
+
+select *from Worker;
+SELECT SALARY FROM Worker;
+SELECT 3+8;
+select 20+35;
+select now();
+SELECT LCASE('DFADFRT');
+SELECT UCASE('jkhukt');
+SELECT * FROM Worker WHERE SALARY>500000;
+select * FROM Worker WHERE DEPARTMENT = 'HRE';
+select * FROM Worker WHERE DEPARTMENT = 'DEVLOPER';
+SELECT * FROM Worker WHERE SALARY BETWEEN 50000 AND 800000;
+
+SELECT * FROM Worker WHERE DEPARTMENT = 'HRE'OR DEPARTMENT='DEVLOPER';
+
+SELECT * FROM Worker WHERE DEPARTMENT IN ('HRE','DEVLOPER');
+
+SELECT * FROM Worker WHERE DEPARTMENT NOT IN ('HRE');
+SELECT * FROM Worker;
+SELECT * FROM Worker WHERE FIRST_NAME LIKE '_A_';
+SELECT * FROM Worker WHERE LAST_NAME LIKE '%A_';
+
+ -- SORTED ORDER  BY---->>>>>
+SELECT * FROM Worker order by SALARY;
+-- SORTED BY ASSENDING>>>>>>>>
+SELECT * FROM Worker ORDER BY SALARY ASC; 
+-- SORTED BY DECENDING>>>>>>>>>>
+SELECT * FROM Worker ORDER BY SALARY DESC; 
+ 
+SELECT DEPARTMENT from Worker ;
+
+SELECT distinct DEPARTMENT from Worker;
+
+SELECT DEPARTMENT,count(*) FROM Worker group by DEPARTMENT;
+SELECT DEPARTMENT ,COUNT(DEPARTMENT) FROM Worker GROUP BY DEPARTMENT;
+
+-- AVG SALARY >>>>>>>>>>>>>>
+SELECT DEPARTMENT ,AVG(SALARY) FROM Worker GROUP BY DEPARTMENT;
+-- MIN SALARY >>>>>>>>>>>>>>
+SELECT DEPARTMENT,MIN(SALARY) FROM Worker GROUP BY DEPARTMENT;
+-- MAX SALARY >>>>>>
+SELECT DEPARTMENT ,MAX(SALARY) FROM Worker group by DEPARTMENT;
+-- SUM  OF SALARY >>>>>>>>
+SELECT DEPARTMENT,SUM(SALARY) FROM Worker group by DEPARTMENT;
+ 
+ -- HAVING WITH GROUP BY ->>>>>>
+ SELECT DEPARTMENT,COUNT(DEPARTMENT) FROM Worker  GROUP BY DEPARTMENT HAVING COUNT (DEPARTMENT) >1;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ CREATE DATABASE BANK;
+ USE BANK;
+ CREATE TABLE ACCOUNTS(
+ ID INT PRIMARY KEY,
+ NAME VARCHAR (255) UNIQUE,
+ BALANCE INT ,
+ CONSTRAINT ACCOUNTVALUE check(BALANCE>1000)
+ );
+ 
+ INSERT INTO ACCOUNTS (ID,NAME,BALANCE)VALUES
+ (1,'SANKHA',524823556),
+ (2,'RAM',25468.6),
+ (3,'ABDUL',896863385);
+ INSERT INTO ACCOUNTS (ID,NAME,BALANCE)value
+ (4,'KALU',63683);
+ INSERT INTO ACCOUNTS  (ID,NAME,BALANCE)value
+ (5,'SAMU',10000);
+ 
+ DROP TABLE ACCOUNTS;
+  CREATE TABLE ACCOUNTS(
+ ID INT PRIMARY KEY,
+ NAME VARCHAR (255) UNIQUE,
+ BALANCE INT NOT NULL DEFAULT 200
+ );
+  INSERT INTO ACCOUNTS (ID,NAME)VALUES
+ (1,'SANKHA'),
+ (2,'RAM'),
+ (3,'ABDUL');
+ INSERT INTO ACCOUNTS (ID,NAME)value
+ (4,'KALU');
+ INSERT INTO ACCOUNTS  (ID,NAME)value
+ (5,'SAMU');
+ 
+ SELECT * FROM ACCOUNTS;
+ -- ALTER COMMAND FOR MODIFY ,CHANGE,RANAME,ORADD ->>>>
+ 
+ -- ADD COLUMN ->>
+ ALTER TABLE ACCOUNTS ADD INTEREST FLOAT NOT NULL DEFAULT 0;
+ -- MODIFY ->>
+ ALTER TABLE ACCOUNTS modify INTEREST double NOT NULL DEFAULT 0;
+
+-- CHANGE COLUMN ->>>>
+ALTER TABLE ACCOUNTS CHANGE INTEREST CURRENT_INTEREST FLOAT NOT NULL DEFAULT 0; 
+-- DROP COLUMN =->>>>>>>
+ALTER TABLE ACCOUNTS DROP COLUMN CURRENT_INTEREST;
+
+-- RENAME COLUMN =->>>
+ALTER TABLE ACCOUNTS rename TO ACCOUNTS_DETAILS;
+select*FROM ACCOUNTS_DETAILS;
+
+ CREATE database CUSTOMER;
+ USE CUSTOMER;
+ CREATE TABLE HELPING(
+ CUSTOMER_ID INT primary key,
+ NAME VARCHAR(255),
+ ADDRESS VARCHAR(255),
+ GENDER VARCHAR(255),
+ CITY VARCHAR(255),
+ PIN int
+ );
+ 
+ insert into HELPING ( CUSTOMER_ID ,NAME, GENDER, CITY, PIN )VALUES 
+ (01,'SANKHA','M','INDIA',736207),
+ (02,'SAM','M','INDIA',736207),
+ (04,'RAM','M','INDIA',736207),
+ (05,'JADU','M','INDIA',736207),
+ (06,'FALU','M','INDIA',736207);
+ 
+  insert into HELPING ( CUSTOMER_ID ,NAME )VALUES 
+   (07,'MADHU');
+   
+   select * FROM HELPING;
+   -- UPDATES ->>>>>>>
+   SET SQL_SAFE_UPDATES =0;
+  update HELPING SET CUSTOMER_ID=005 ,NAME='JADU', GENDER='F', CITY='PAKISTABN', PIN=32421 WHERE CUSTOMER_ID = 05; 
+  UPDATE HELPING SET CITY ='BANGLADESH' WHERE CUSTOMER_ID=04;
+  UPDATE HELPING SET CITY ='INDIA',PIN=736207;
+  
+  -- DELETE ->>>>>>
+  SET SQL_SAFE_UPDATES =0;
+  DELETE FROM HELPING WHERE CUSTOMER_ID = 01;
+  delete FROM HELPING WHERE CUSTOMER_ID = 03;
+  DELETE FROM HELPING;
+  drop table HELPING;
+  DROP TABLE ORDERS;
+  
+  
+  
+
+create table AMAZON (
+CUSTOMER_ID INT primary key,
+ADDRESS varchar(255),
+PIN INT 
+);
+insert into AMAZON (CUSTOMER_ID,ADDRESS,PIN ) values
+(01,'INDIA',025721);
+
+insert into OREDERS (ORDER_ID,COST,PIN,CUSTO_ID) values
+(04151,500,025721,01);
+
+create table OREDERS (
+ORDER_ID INT primary key,
+COST int,
+PIN int,
+CUSTO_ID int,
+foreign key (CUSTO_ID)
+references AMAZON(CUSTOMER_ID)
+ON DELETE SET NULL
+);
+delete from AMAZON ;
+drop table OREDERS;
+
+                           
+select* from  OREDERS;
+select* from  AMAZON;
+-- REPLACE --->>>>
+REPLACE into OREDERS (ORDER_ID,PIN)values
+(04151,656754);
+REPLACE into OREDERS (ORDER_ID,PIN)values (05,50007);
+
+replace into AMAZON SET CUSTOMER_ID=1,PIN=736207;
+replace into OREDERS SET ORDER_ID=5,PIN=736207;
+
+
+
+create database NOTUN;
+USE NOTUN;
+
+CREATE TABLE EMPLOYEE (
+ID INT PRIMARY KEY,
+FNAME VARCHAR(255),
+LNAME varchar(255),
+AGE INT,
+EMAILID varchar(255),
+PHONE_NO INT,
+CITY varchar(255)
+); 
+insert INTO EMPLOYEE (ID,FNAME,LNAME,AGE,EMAILID,PHONE_NO,CITY ) values
+(1,'SAM','SUN',40,'NAME@GMAIL.COM',356523,'KOLKATA'),
+(2,'RAM','SUL',51,'TUL@GMAIL.COM',356523,'DELHI'),
+(3,'BAM','MUL',30,'KORL@GMAIL.COM',356523,'NAUTHUYA'),
+(4,'KAM','HYU',22,'KAMAI@GMAIL.COM',356523,'HYDERABAD'),
+(5,'HOR','JUN',19,'HORA@GMAIL.COM',356523,'INDORE'),
+(6,'KUL','PUN',20,'ATTHE@GMAIL.COM',356523,'SINGAPUR');
+
+
+CREATE TABLE CLIENTS (
+ID INT PRIMARY KEY,
+FIRST_NAME VARCHAR(255),
+LAST_NAME varchar(255),
+AGE INT,
+EMAILID varchar(255),
+PHONE_NO INT,
+CITY varchar(255),
+emp_id INT,
+foreign key (emp_id)
+references  EMPLOYEE(ID)
+ON DELETE cascade
+); 
+
+INSERT INTO CLIENTS 
+(ID ,FIRST_NAME,AGE,EMAILID ,PHONE_NO,CITY,emp_id)values
+(1,'SUHAN',20,'JHS@GAMIL.COM',355638,'KOLKATA',2),
+(2,'FOUJ',24,'JUGHFGYS@GAMIL.COM',3353,'BIHAR',1),
+(3,'KALAM',22,'UYTYS@GAMIL.COM',8058,'JHARKHAND',4),
+(4,'ABDUL',20,'JJHFG@GAMIL.COM',80504,'NOIDA',2);
+
+
+CREATE TABLE PROJECT (
+IDS INT PRIMARY KEY,
+EMPID INT,
+foreign key (EMPID)
+references  EMPLOYEE(ID)
+ON delete cascade,
+NAME varchar(255),
+STARTDATE date ,
+CLIENT_ID int,
+foreign key (CLIENT_ID)
+references CLIENTS(ID)
+on delete cascade
+);
+INSERT INTO PROJECT 
+(IDS,EMPID,NAME,STARTDATE,CLIENT_ID)VALUES
+(001,1,'A','2022-02-3',2),
+(003,2,'B','2022-02-6',1),
+(002,3,'C','2022-02-8',2);
+select*from CLIENTS;
+select*from CLIENTS;
+
+-- QUERY IN SUB QUERY =-->>
+SELECT * FROM EMPLOYEE WHERE AGE IN(SELECT AGE FROM EMPLOYEE WHERE AGE>30);
+SELECT * FROM EMPLOYEE WHERE ID IN(SELECT EMPID FROM PROJECT GROUP BY EMPID HAVING COUNT(EMPID)>1 );
+
+
+-- SINGEL VALUE SUBQUERY >>====--------------------------------------->>>>
+SELECT* FROM EMPLOYEE WHERE AGE > (SELECT AVG(AGE) FROM EMPLOYEE);
+
+SELECT MAX(AGE) FROM (SELECT * FROM EMPLOYEE WHERE FNAME LIKE '%A%') AS XYZ;
+-- inner join -->>>
+SELECT E.ID,E.FNAME,E.LNAME,P.IDS,P.NAME FROM EMPLOYEE AS E INNER JOIN PROJECT AS P ON E.ID=P.EMPID;
+SELECT * FROM EMPLOYEE AS E INNER JOIN PROJECT AS P ON E.ID=P.EMPID;
+ select E.ID ,E.EMAILID,E.PHONE_NO,C.ID,C.CITY FROM EMPLOYEE AS E
+ INNER JOIN CLIENTS AS C ON E.ID = C.emp_id;
+ 
+ SELECT E.ID,E.EMAILID,E.PHONE_NO,C.ID,C.CITY  FROM EMPLOYEE AS E INNER JOIN CLIENTS AS C 
+ ON E.ID=C.emp_id WHERE C.CITY ='KOLKATA';
+ 
+ 
+ --  RIGHT JOIN --->>>>>>>>
+ SELECT * FROM EMPLOYEE AS E RIGHT JOIN PROJECT AS P ON E.ID = P.EMPID;
+ 
+ -- LEFT JOIN -->
+ SELECT * FROM  EMPLOYEE AS E LEFT JOIN PROJECT AS P ON E.ID=P.EMPID;
+ 
+ SELECT * FROM PROJECT AS P LEFT JOIN EMPLOYEE AS E ON E.ID=P.EMPID;
+ 
+ -- CROSS JOIN --->>>>>>
+ SELECT E.ID,P.IDS FROM PROJECT AS P LEFT JOIN EMPLOYEE AS E ON E.ID=P.EMPID;
+ 
+ -- INNER JOIN WITHOUT INNER JOIN KEYWORD -->>>
+ SELECT * FROM EMPLOYEE AS E , PROJECT AS P WHERE E.ID = P.EMPID;
+ SELECT * FROM CLIENTS AS C, EMPLOYEE AS E WHERE E.ID = C.emp_id;
+ 
+ CREATE DATABASE ABC;
+ USE ABC;
+ CREATE TABLE DEPARTMENT1(
+ empID INT PRIMARY KEY,
+ NAME VARCHAR(255),
+ ROLE VARCHAR(255)
+ );
+ 
+ INSERT INTO DEPARTMENT1 (empID,NAME ,ROLE) VALUES
+ (1,'A','ENGNIEER'),
+ (2,'B','SALESMAN'),
+ (3,'C','MANAGER'),
+ (4,'D','ENGINEER');
+ 
+ CREATE TABLE DEPARTMENT2 (
+ empID INT PRIMARY KEY,
+ NAME VARCHAR (255),
+ ROLE VARCHAR(255)
+ );
+ 
+ INSERT INTO DEPARTMENT2 (empID,NAME ,ROLE) VALUES
+(3,'C','MANAGWER'),
+(6,'F','MARKETING'),
+(7,'C','SALESMAN');
+-- UNION =-->>
+SELECT * FROM DEPARTMENT1
+UNION
+SELECT * FROM DEPARTMENT2;
+
+select * FROM DEPARTMENT1 WHERE ROLE = 'SALESMAN'
+UNION
+SELECT * FROM DEPARTMENT2 WHERE ROLE = 'SALESMAN';
+
+-- INTERSECTION =-->
+SELECT * FROM DEPARTMENT1 INNER JOIN DEPARTMENT2 USING(empID);
+SELECT DEPARTMENT1.* FROM DEPARTMENT1 INNER JOIN DEPARTMENT2 USING(empID);
+
+-- MINUS =-->
+SELECT DEPARTMENT1.* FROM DEPARTMENT1 LEFT JOIN DEPARTMENT2 USING(empID);
+
+-- SQL VIEW ---->
+CREATE VIEW SEE_VIEW AS SELECT FNAME ,AGE FROM EMPLOYEE;
+
+SELECT * FROM SEE_VIEW;
+
+ALTER VIEW SEE_VIEW AS SELECT FNAME,LNAME,AGE FROM EMPLOYEE;
+
+DROP VIEW IF EXISTS SEE_VIEW;
+
+CREATE VIEW AGERABAGERA AS SELECT FNAME FROM EMPLOYEE;
+SELECT*FROM AGERABAGERA;
+ALTER VIEW AGERABAGERA AS SELECT FNAME,AGE FROM EMPLOYEE;
+
+
+
+create database xyz;
+use xyz;
+create table WORKER (
+WORKER_ID INT PRIMARY KEY ,
+FNAME VARCHAR(255),
+LNAME VARCHAR(255),
+SALARY INT,
+JONING_DATE DATETIME,
+DEPT VARCHAR(255)
+);
+INSERT INTO WORKER (WORKER_ID  ,FNAME ,LNAME ,SALARY ,JONING_DATE,DEPT) VALUES 
+(1,'GHSDG','SHDF',463659,'2022-02-1 09.00.03','HR'),
+(2,'CHEBLA','FSD',111015,'2022-02-3 10.00.03','ADMIN'),
+(3,'HEBLA','DFD',76876465,'2022-02-4 09.7.03','HR'),
+(4,'KABLA','NTGRTD',663785,'2022-02-5 09.10.03','ADMIN'),
+(5,'MADHAI','BDT',32745343,'2022-02-6 09.52.03','ADMIN'),
+(6,'JOGAI','MHK',553536,'2022-02-7 08.00.03','ACCOUNT');
+SET SQL_SAFE_UPDATES =0;
+DELETE FROM WORKER;
+
+SELECT * FROM WORKER;
+
+CREATE TABLE BONUS(
+WORKER_REF_ID INT,
+BONUS_AMOUNT INT,
+BONUS_DATE DATETIME,
+FOREIGN KEY (WORKER_REF_ID)
+REFERENCES WORKER(WORKER_ID) ON DELETE CASCADE 
+);
+
+INSERT INTO bonus (WORKER_REF_ID,BONUS_AMOUNT, BONUS_DATE) values
+(1,5000,'2022-03-6 05.00.42'),
+(2,5000,'2022-03-7 2.05.00'),
+(3,5000,'2022-03-7 12.01.22'),
+(1,10000,'2022-03-8 08.30.32'),
+(2,10000,'2022-03-9 07.29.12');
+select * from bonus;
+
+create table TITLE (
+WORKER_REF_ID INT ,
+WORKER_ROLE VARCHAR(255),
+AFFECTED_FROM DATE,
+FOREIGN KEY (WORKER_REF_ID) REFERENCES WORKER (WORKER_ID) ON DELETE CASCADE
+);
+
+INSERT INTO TITLE (WORKER_REF_ID,WORKER_ROLE,AFFECTED_FROM) VALUES 
+(1,'MANAGER','2022-03-11'),
+(2,'EXECUTIVE','2022-03-11'),
+(5,'EXECUTIVE','2022-03-4'),
+(4,'ASST.MANAGER','2022-03-5'),
+(6,'MANAGER','2022-03-17'),
+(3,'EXECUTIVE','2022-03-18');
+
+SELECT FNAME FROM WORKER;
+-- WRITE AN SQL QUERY TO FETCH 'FNAME' FROM WORKER TABLE ALIAS AS 'WORKER_NAME' ==------>>>>
+SELECT FNAME AS WORKER_NAME FROM WORKER;
+
+-- WRITE AN SQL QUERY TO FETCH 'FNAME ' FROM WORKER TABLE IN UPPER CASE ===------->>
+SELECT upper(FNAME) FROM WORKER;
+-- WRITE AN SQL QUERY TO FETCH UNIQUE VALUE OF DEPARTMENT FROM WORKER TABLE ===------->>
+SELECT DISTINCT DEPT FROM WORKER;
+SELECT DEPT FROM WORKER GROUP BY DEPT;
+
+-- WRITE AN SQL QUERY TO FIND PRINT THE SUBSTRING OF FNAME ==->
+SELECT substring(FNAME ,1,4 ) FROM WORKER;
+
+-- WRITE AN SQL QUERY TO FIND POSITIN OF 'A' FROM FNAME 'JOGAI' ==----->>>>>
+SELECT FNAME FROM WORKER WHERE FNAME='JOGAI';
+SELECT INSTR(FNAME,'A') FROM WORKER WHERE FNAME='JOGAI';
+
+-- WRITE AN SQL QUERY TO PRINT FNAME FROM WORKER TBLE AFTER REMOVINT THE WHITE SPASE FROM THE RIGHT SIDE ===------->>
+SELECT rtrim(FNAME ) FROM WORKER;
+
+-- WRITE AN SQL QUERY TO PRINT FNAME FROM WORKER TBLE AFTER REMOVINT THE WHITE SPASE FROM THE LEFT SIDE ===------->>
+SELECT ltrim(FNAME) FROM WORKER;
+
+-- WRITE AN SQL QUERY THAT FETCH THE UNIQUE VALUES FROM DEPT AND PRINTS ITS LENGTH ==-->>
+SELECT distinct DEPT,length(DEPT) FROM WORKER;
+
+-- REPLACE 'A' to 'a' ==-->
+SELECT  REPLACE(FNAME,'A','a') FROM WORKER; 
+
+-- CONCATINATE ---->>
+SELECT CONCAT(FNAME , ' ' ,LNAME) from WORKER;
+SELECT CONCAT(FNAME,' ',LNAME) AS COMPLETE_NAME FROM WORKER;
+
+-- ORDER BY ---->>
+SELECT * FROM WORKER order by SALARY;
+SELECT * FROM WORKER order by FNAME;
+SELECT * FROM WORKER order by FNAME,DEPT desc;
+
+-- IN COMMAND --->>>
+SELECT * FROM WORKER WHERE FNAME in ('JOGAI','HEBLA');
+
+-- NOT IN -->>
+SELECT * FROM WORKER WHERE FNAME NOT IN ('JOGAI','HEBLA');
+
+SELECT * FROM WORKER WHERE DEPT LIKE'AD%';
+
+SELECT * FROM WORKER WHERE FNAME LIKE '_A%';
+-- END ID 'A'==-->>
+SELECT * FROM WORKER WHERE FNAME LIKE '%A';
+-- TOTAL SIX DIGIT AND LAST 'H' -->
+SELECT *FROM WORKER WHERE FNAME LIKE '-----H';
+-- BETWEEN -->
+SELECT * FROM WORKER WHERE SALARY BETWEEN 354335 AND 53435347;
+
+SELECT * FROM WORKER WHERE year(JONING_DATE) = 2022  AND  MONTH(JONING_DATE) = 02;
+
+SELECT DEPT ,COUNT(DEPT) FROM WORKER WHERE DEPT ='ADMIN';
+
+
+SELECT * FROM WORKER;
+select concat(FNAME,' ',LNAME) AS NAME FROM WORKER WHERE SALARY between 553534 AND 553537;
+
+
+
+-- GROUP BY ==--->>
+SELECT DEPT from WORKER group by DEPT;
+SELECT DEPT , COUNT(WORKER_ID) FROM WORKER group by DEPT ;
+SELECT DEPT , COUNT(WORKER_ID) AS TOTAL_WORKER FROM WORKER group by DEPT ;
+SELECT DEPT , COUNT(WORKER_ID) AS TOTAL_WORKER FROM WORKER group by DEPT ORDER BY TOTAL_WORKER  ;
+SELECT DEPT , COUNT(WORKER_ID) AS TOTAL_WORKER FROM WORKER group by DEPT ORDER BY TOTAL_WORKER  desc;
+
+
+SELECT * FROM WORKER AS W inner join TITLE AS T ON WORKER_ID = WORKER_REF_ID;
+SELECT * FROM WORKER AS W inner join TITLE AS T ON WORKER_ID = WORKER_REF_ID WHERE WORKER_ROLE='MANAGER';
+select W.* from WORKER AS W inner join TITLE AS T ON WORKER_ID=WORKER_REF_ID WHERE WORKER_ROLE='MANAGER';
+
+select WORKER_ROLE FROM TITLE;
+select WORKER_ROLE,COUNT(WORKER_ROLE) FROM TITLE group by WORKER_ROLE;
+select WORKER_ROLE,COUNT(WORKER_ROLE) FROM TITLE group by WORKER_ROLE having count(WORKER_ROLE)>1;
+select WORKER_ROLE,COUNT(WORKER_ROLE) AS ALL_COUNT FROM TITLE group by WORKER_ROLE having ALL_COUNT>1;
+
+
+
+--  PRINT odd  LINES 
+SELECT * FROM WORKER WHERE MOD (WORKER_ID,2) !=0;
+-- PRINT EVEN ROWS -->>>>>>>>>
+SELECT * FROM WORKER WHERE MOD (WORKER_ID,2) =0;
+
+
+-- CLONE TABLE -->>>>>
+CREATE TABLE WORKER2 LIKE WORKER;
+SELECT * from WORKER2;
+INSERT INTO WORKER2 select*FROM WORKER;
+
+-- INTERSECTION
+SELECT WORKER.* FROM WORKER inner join WORKER2 using(WORKER_ID);
+SELECT * FROM WORKER AS W,WORKER2 AS W2 WHERE W.WORKER_ID = W2.WORKER_ID;
+
+-- MINUS OR THAT PART WHICH IS NOT PRESENT IN ANOTHER TABEL --->>>>>>
+SELECT * FROM WORKER LEFT JOIN WORKER2 USING(WORKER_ID) WHERE WORKER2.WORKER_ID IS NULL;
+
+
+-- SERVER DATE TIME -->>>>
+SELECT curdate();
+SELECT curtime();
+SELECT now();
+
+
+-- ORDER BY IN LIMIT --->>
+SELECT * from WORKER ORDER BY SALARY DESC;
+SELECT * from WORKER ORDER BY SALARY DESC LIMIT 5;
+SELECT * FROM WORKER ORDER BY SALARY asc LIMIT 3;
+
+
+-- PRINT THE nTH HIGHESR SALARY ; 
+SELECT * FROM WORKER order by SALARY asc limit 4,1;
+SELECT * FROM WORKER order by SALARY asc limit 2,1;
+SELECT * FROM WORKER order by SALARY asc limit 1,1;
+SELECT * FROM WORKER order by SALARY asc limit 0,1;
+SELECT * FROM WORKER order by SALARY desc limit 5,1;
+
+
+
+
+-- SAME SALARY IN ONE TABLE ---->>>>>
+SELECT * FROM WORKER W1,WORKER W2 WHERE W1.SALARY = W2.SALARY ;
+SELECT * FROM WORKER W1,WORKER W2 WHERE W1.SALARY = W2.SALARY AND W1.WORKER_ID !=W2.WORKER_ID;
+
+
+SELECT MAX(SALARY ) FROM WORKER WHERE SALARY NOT IN (SELECT MAX(SALARY) FROM WORKER);
+
+
+
+-- UNION -->>>>>>>
+select* FROM WORKER
+ UNION 
+ SELECT * FROM WORKER;
+
+SELECT * FROM WORKER
+ UNION ALL 
+ select * FROM WORKER;
+
+SELECT * FROM WORKER 
+UNION ALL
+ select * FROM WORKER ORDER BY WORKER_ID;
+ 
+ -- PRINT WHICH IS NOT GET BONUS
+ SELECT WORKER_ID FROM WORKER WHERE WORKER_ID NOT IN(SELECT WORKER_REF_ID FROM BONUS );
+ 
+-- PRINT HALF TABLE
+SELECT *FROM WORKER WHERE WORKER_ID <=(SELECT COUNT(WORKER_ID)/2 from WORKER);
+
+
+select DEPT ,count(WORKER_ID) FROM WORKER GROUP BY DEPT;
+select DEPT ,count(WORKER_ID) FROM WORKER GROUP BY DEPT HAVING COUNT(WORKER_ID)>2;
+select DEPT ,count(WORKER_ID) AS ID_COUNT FROM WORKER GROUP BY DEPT HAVING ID_COUNT>2;
+
+
+
+-- LAST ROW -->>>>>>
+SELECT * FROM WORKER WHERE WORKER_ID = (SELECT max(WORKER_ID) FROM WORKER);
+
+-- FIRST ROW OF THE TABLE ----.
+SELECT * FROM WORKER WHERE WORKER_ID=(SELECT MIN(WORKER_ID) FROM WORKER);
+
+
+-- LAST FIVE ROWS --->>>>>>>
+select *FROM WORKER order by WORKER_ID DESC limit 5;
+(select *FROM WORKER order by WORKER_ID DESC limit 5 )ORDER BY WORKER_ID;
+
+
+
+
+-- higest salary person in each department -------->>
+select max(SALARY) AS MAXS ,DEPT FROM WORKER GROUP BY DEPT;
+
+select W.WORKER_ID,W.FNAME,W.SALARY FROM 
+(select MAX(SALARY) AS MAXS ,DEPT FROM WORKER group by DEPT) TEMP INNER JOIN WORKER AS W
+ON W.SALARY=TEMP.MAXS AND W.DEPT=TEMP.DEPT;
+
+
+-- HIGHEST SALARY ---->>>>>>>>
+SELECT DISTINCT SALARY FROM WORKER order by SALARY DESC LIMIT 3;
+
+
+-- SUM SALARY OF EACH DEPARTMENT ------->>>>>>
+SELECT DEPT,sum(SALARY) AS SUM_SALARY FROM WORKER group by DEPT order by sum_SALARY ;
+SELECT DEPT,sum(SALARY) AS SUM_SALARY FROM WORKER group by DEPT order by sum_SALARY desc ;
+
+
+
+
+ SELECT FNAME,SALARY FROM WORKER WHERE SALARY =(select MAX(SALARY) FROM WORKER );
+ 
+ 
+ 
+ 
+ CREATE database ABCD;
+ USE ABCD;
+ CREATE TABLE PAIRS (
+ LEFTS INT ,
+ RIGTS INT
+ );
+ INSERT INTO PAIRS VALUES 
+ (1,2),
+ (2,4),
+ (2,1),
+ (3,2),
+ (4,2),
+ (5,6),
+ (6,5),
+ (7,8);
+  DROP TABLE PAIRS;
+  
+  select * FROM  PAIRS AS P1 LEFT JOIN PAIRS AS P2 ON P1.LEFTS = P2.RIGTS AND P1.RIGTS = P2.LEFTS ;
+
+ 
+
+ select * FROM  PAIRS AS P1 LEFT JOIN PAIRS AS P2 ON P1.LEFTS = P2.RIGTS AND P1.RIGTS = P2.LEFTS
+ WHERE  P2.LEFTS IS NULL OR P1.LEFTS<P2.LEFTS;
+ 
+ select P1.* FROM  PAIRS AS P1 LEFT JOIN PAIRS AS P2 ON P1.LEFTS = P2.RIGTS AND P1.RIGTS = P2.LEFTS
+ WHERE  P2.LEFTS IS NULL OR P1.LEFTS<P2.LEFTS;
+ 
+ 
+show databases;
+
+
+select * from student;
+use springjdbc;
+delete  from springjdbc;
+
+create database project;
+use project;
+
+create table users(id int primary key,uname varchar(50),umail varchar(50));
+
+
+
+
+
+
+
+
+
+ create database xyz;
+use xyz; 
+create table worker (
+id int not null primary key auto_increment,
+fname varchar(222),
+lname varchar(222),
+salary int,
+joiningDate date,
+department varchar(100)
+);
+
+
+insert into worker(id,fname,lname,salary,joiningDate,department) values
+(1,'monika','arora',100000,'21-6-8','hr'),
+(2,'nihal','verma',80000,'21-6-14','admin'),
+(3,'vishal','daht',300000,'21-6-14','hr'),
+(4,'amitab','vath',500000,'21-6-25','admin'),
+(5,'githesh','goeal',500000,'21-6-23','admin'),
+(6,'hiren','diba',200000,'21-8-8','developer'),
+(7,'raju','kar',75000,'21-9-17','account'),
+(8,'sama','sen',90000,'21-6-7','developer');
+
+create table bonus (
+workerRefId int ,
+foreign key(workerRefId) references worker(id),
+bonusamount int,
+bonusdate date);
+
+insert into bonus(workerRefId ,bonusamount,bonusdate) values
+(1,5000,'22-10-4'),
+(2,3000,'22-9-6'),
+(4,4000,'22-11-22'),
+(3,58000,'22-10-14'),
+(1,15000,'22-12-13');
+
+create table title (
+workerRefId int,
+foreign key(workerRefId) references worker (id),
+title varchar(100),
+affected date);
+insert into title (workerRefId,title,affected) values
+(1,'manager','23-2-20'),
+(1,'executive','23-2-22'),
+(1,'executive','23-2-23'),
+(1,'manager','23-4-9'),
+(1,'salseman','23-3-30'),
+(1,'excutive','23-6-18');
+
+select * from worker;
+select * from bonus;
+select * from title;
+
+select fname as workerName from worker;
+select upper(fname) from worker;
+select lcase(fname) from worker;
+select fname as workerNames from worker;
+select distinct department from worker;
+select  department from worker group by department;
+select substring(fname,1,3) from worker;
+select instr('amitab','b') from worker where fname='amitab';
+select rtrim(fname) from worker;
+select ltrim(fname) from worker;
+select department,count(department),length(department) from worker group by department;
+select replace(fname,'a','A') from worker;
+select concat(fname,' ',lname) from worker;
+select * from worker order by fname desc;
+select * from  worker order by lname desc;
+select * from worker as details order by fname asc,department desc;
+select * from worker order by fname , salary desc, id asc;
+select fname as fisrtName , lname as lastNames from worker;
+select * from worker where fname in ('amitab','monika');
+select * from worker where fname not in('amitab','monika');
+select * from worker where department='hr';
+ select * from worker where fname like 'a%';
+select * from worker where fname like'%a%'; 
+select * from worker where fname like'%a'; 
+select * from worker where fname like'_____h';
+select * from worker where fname like '%a' and length(fname)=6;
+select * from worker where salary >=300000 and salary<=500000;
+select * from worker where year(joiningDate)=2021 and month(joiningDate)=06;
+select department,count(department) from worker where department='admin' group by department ;
+select department,count(department) from worker where department='admin';
+select concat(fname,'  ',lname) as EmployeeNames from worker where salary >=50000 and salary<=100000;
+select department,count(department) as no from worker group by department order by count(id) desc;
+select w.* from worker as w inner join title as t on w.id=t.workerRefId where title='manager';
+select title as t,count(title)as t from title group by title  having count(title)>1;
+select * from worker where mod(id,2)!=0;
+select * from worker where mod(id,2)=0;
+create view vs as select fname,id from worker;
+select * from vs;
+create table wrClone like worker;
+select * from wrClone;
+insert into wrClone select * from worker;
+select worker.* from worker inner join wrClone using(id);
+select * from worker left join wrClone using(id) where wrClone.id is null;
+select current_date();
+select now();
+select * from worker order by salary desc limit 5;
+select * from worker order by salary desc limit 3,1;
+select * from worker as w1 where 4=(select count(w2.salary) from worker as w2 where w2.salary>=w1.salary);
+select * from worker as w1 ,worker as w2 where w1.salary=w2.salary; 
+select * from worker as w1,worker as w2 where w1 .salary=w2.salary and w1.id!=w2.id;
+select max(salary) from worker where salary not in (select max(salary) from worker);
+select * from worker union select * from worker; 
+select * from worker union all select * from worker order by id; 
+select * from worker where id not in(select workerRefId from bonus);
+select * from worker where id<=(select count(id)/2 from worker);
+select department,count(department) as total from worker group by department having count(department)<4;
+select * from worker where id =(select max(id) from worker);
+select * from worker where id=(select min(id) from worker);
+(select * from worker order by id desc limit 5) order by id;
+select department ,max(salary),sum(salary),min(salary) from worker group by department;
+select w.id,w.fname,w.salary,w.department from 
+(select department,max(salary) as mas from worker group by department) as temp
+ inner join worker as w on w.department=temp.department and w.salary=temp.mas;
+ select distinct salary from worker as w1 where 3>=
+ (select count(distinct salary) from worker as w2 where w1.salary<=w2.salary) order by salary ;
+ select distinct salary from worker order by salary desc limit 3;
+ select distinct salary from worker order by salary limit 3;
+ select fname,lname,salary from worker where salary=(select max(salary) from worker);
+ select distinct salary from worker as w1 where 3>=
+ (select count(distinct salary) from worker as w2 where w1.salary>=w2.salary ) order by salary;
+ 
+ create table pairs(
+ a int,
+ b int);
+ insert into pairs values(1,2),(2,4),(2,1),(3,2),(4,2),(5,6),(6,5),(7,6);
+ select * from pairs;
+ select lt.* from pairs as lt left join pairs as rt on lt.a=rt.b and lt.b=rt.a where rt.a is null or lt.a<rt.a;
+ select * from pairs as p1 where not exists(select * from pairs as p2 where p1.a=p2.b and p1.b=p2.a and p1.a>p2.a);
+ 
+ 
+ 
+ 
+ 
+ use  newdb;
+ update  more  set name ="rama",address="abc" where id =1;
+ select * from dup;
+alter table more add csp int;
+alter table more drop csp;
+create table ph(id int primary key not null,name varchar(100),number int);
+show tables;
+alter table phonebook modify column number double;
+drop database xyz;
+ create database student;
+use student;
+ create table details (id int not null primary key auto_increment,name varchar(200),dateofaddmision int,studentaddress varchar(200),qualification varchar(100),email varchar(150),password int);
+ use sys;
+ create table dup2(id int primary key,name varchar(150),email varchar(80),password varchar(10), address varchar(200));
+ drop table det2;
+ create table det (id int primary key auto_increment,name varchar(200),dateofaddmision varchar(100),studentaddress varchar(200),qualification varchar(100), state varchar(220),email varchar(150),password varchar(10));
+ use student;
+ desc details;
+ 
+  create table det2 (id int primary key auto_increment ,fullname varchar(100),date varchar(100),qualification varchar(100),address varchar(100),email varchar(100),password varchar(100));
+ desc table det2;
+ 
+ create database hospital;
+ use hospital;
+ create table user(id int primary key auto_increment not null ,name varchar(100),email varchar(100) ,password varchar(100) not null);
+ select * from user;
+ drop table user;
+ create table specialist (id int not null primary key auto_increment, name varchar(200));
+ 
+ create table doctor (id int primary key not null auto_increment,name varchar(200),qualification varchar(200),specialist varchar(200),email varchar(100),mobile int,password int);
+ drop table doctor;
+ select * from doctor;
+ 
+ desc appointment;
+ create table appointment
+ (id int primary key auto_increment not null,
+ userid int not null,
+ foreign key (userid) references user(id) on delete cascade,
+ fullname varchar(100) not null,
+ age varchar(3) not null,
+ email varchar(100) not null,
+ disease varchar(100)not null,
+ gender varchar(10) not null,
+ appointmentdate varchar(20)not null,
+ phoneno varchar(10) not null,
+ doctorid int not null,
+ foreign key (doctorid) references doctor(id) on delete cascade,
+ address varchar(500) not null,
+ status varchar(50));
+ select * from appointment;
+ delete from appointment where id =2;
+update appointment set disease="Fever" where id=2;
+ select * from doctor;
+ desc appointment;
+ 
+  select * from user;
